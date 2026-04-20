@@ -3,111 +3,233 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>2026港澳吃喝團之小馬哥首航</title>
 
-<script src="https://cdn.tailwindcss.com"></script>
+<title>2026港澳吃喝之小馬哥首航</title>
+
 <script src="https://unpkg.com/vue@3"></script>
-
-<link rel="manifest" href="manifest.json">
+<script src="https://cdn.tailwindcss.com"></script>
 
 <style>
-body{margin:0;font-family:sans-serif;background:#0b1220;color:white}
-.card{margin:12px;padding:14px;background:#1e293b;border-radius:16px}
-nav{position:sticky;top:0;background:#0b1220;display:flex;justify-content:space-around;padding:10px;border-bottom:1px solid #333}
-button{padding:8px 12px;border-radius:10px;background:#2563eb;color:white}
+body {
+  background: linear-gradient(to bottom, #0f172a, #1e3a8a);
+}
+.glass {
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.1);
+}
+.tab {
+  padding:10px;
+  cursor:pointer;
+}
+.active {
+  border-bottom:2px solid yellow;
+}
 </style>
 </head>
 
-<body>
-<div id="app">
+<body class="text-white">
 
-<nav>
-<button @click="tab='plan'">行程</button>
-<button @click="tab='weather'">天氣</button>
-<button @click="tab='info'">資訊</button>
-<button @click="tab='bag'">行李</button>
-</nav>
+<div id="app" class="max-w-md mx-auto p-3">
+
+<!-- 標題 -->
+<div class="rounded-xl p-4 mb-3 bg-cover" 
+style="background-image:url('https://images.unsplash.com/photo-1505761671935-60b3a7427bad');">
+
+<h1 class="text-xl font-bold">2026港澳吃喝之小馬哥首航</h1>
+<p class="text-xs mt-1">旅遊人員：小馬哥 / 小村 / 陳RuRu / Ruby / 妹妹</p>
+</div>
+
+<!-- 分頁 -->
+<div class="flex justify-around glass rounded-xl mb-3">
+<div class="tab" :class="{active:tab==1}" @click="tab=1">行程</div>
+<div class="tab" :class="{active:tab==2}" @click="tab=2">資訊</div>
+<div class="tab" :class="{active:tab==3}" @click="tab=3">行李</div>
+<div class="tab" :class="{active:tab==4}" @click="tab=4">大師</div>
+</div>
 
 <!-- 行程 -->
-<div v-if="tab==='plan'">
-<div class="card" v-for="p in plans">
-<h3 class="text-lg font-bold">{{p.name}}</h3>
-<p class="text-sm">{{p.desc}}</p>
-<p class="text-xs text-gray-300">交通：{{p.route}}</p>
-<button @click="go(p)">📍導航</button>
-</div>
+<div v-if="tab==1">
+
+<!-- Day1 -->
+<div class="glass p-3 rounded-xl mb-3">
+<h2 class="font-bold">8/28 (五) 香港 🌤</h2>
+
+<!-- 登機證 -->
+<div class="bg-white text-black p-2 rounded mt-2 text-xs">
+✈ HB703｜TPE 11:30 → HKG 13:30
 </div>
 
-<!-- 天氣 -->
-<div v-if="tab==='weather'" class="card">
-香港：{{weather.hk}}°C<br>
-澳門：{{weather.mo}}°C
+<ul class="text-sm mt-2 space-y-2">
+
+<li>
+13:30 抵達機場  
+📍<a href="https://maps.google.com/?q=香港機場" target="_blank">導航</a>
+</li>
+
+<li>
+S1 巴士 → 東薈城  
+💰3.7HKD｜15分鐘  
+📍<a href="https://maps.google.com/?q=Citygate Outlets" target="_blank">導航</a>
+</li>
+
+<li>
+東薈城購物（COACH）  
+🕒10:00-22:00
+</li>
+
+<li>
+E32 → 葵興站 → 酒店  
+💰10.8HKD｜45分鐘  
+📍<a href="https://maps.google.com/?q=旭逸酒店荃灣" target="_blank">導航</a>
+</li>
+
+<li>
+地鐵 → 灣仔 A3  
+💰15HKD｜35分鐘  
+📍<a href="https://maps.google.com/?q=竺扶大班燒味" target="_blank">燒味</a>
+</li>
+
+<li>
+叮叮車 → 租庇利街  
+💰3HKD  
+📍<a href="https://maps.google.com/?q=中環半山手扶梯" target="_blank">手扶梯</a>
+</li>
+
+<li>
+山頂纜車 → 夜景  
+💰108HKD  
+📍<a href="https://maps.google.com/?q=山頂纜車" target="_blank">導航</a>
+</li>
+
+<li>
+天星小輪 → 尖沙咀  
+💰5HKD  
+📍<a href="https://maps.google.com/?q=佳佳甜品" target="_blank">甜品</a>
+</li>
+
+</ul>
+</div>
+
+<!-- Day2 -->
+<div class="glass p-3 rounded-xl mb-3">
+<h2 class="font-bold">8/29 (六) 香港→澳門 🌤</h2>
+
+<ul class="text-sm mt-2 space-y-2">
+
+<li>
+太子站 → 一點心  
+📍<a href="https://maps.google.com/?q=一點心" target="_blank">導航</a>
+</li>
+
+<li>
+上環購物  
+📍<a href="https://maps.google.com/?q=珍妮曲奇上環" target="_blank">珍妮</a>
+</li>
+
+<li>
+港澳快線 → 澳門  
+💰180HKD
+</li>
+
+<li>
+利澳酒店  
+📍<a href="https://maps.google.com/?q=利澳酒店澳門" target="_blank">導航</a>
+</li>
+
+<li>
+大三巴 + 最香餅家  
+📍<a href="https://maps.google.com/?q=大三巴牌坊" target="_blank">導航</a>
+</li>
+
+</ul>
+</div>
+
+<!-- Day3 -->
+<div class="glass p-3 rounded-xl">
+<h2 class="font-bold">8/30 (日) 澳門→台灣 🌤</h2>
+
+<div class="bg-white text-black p-2 rounded mt-2 text-xs">
+✈ JX206｜MFM 20:50 → TPE 22:40
+</div>
+
+<ul class="text-sm mt-2 space-y-2">
+
+<li>
+世紀咖啡  
+📍<a href="https://maps.google.com/?q=世紀咖啡澳門" target="_blank">導航</a>
+</li>
+
+<li>
+威尼斯人 / 倫敦人  
+📍<a href="https://maps.google.com/?q=威尼斯人澳門" target="_blank">導航</a>
+</li>
+
+<li>
+19:30 機場  
+📍<a href="https://maps.google.com/?q=澳門機場" target="_blank">導航</a>
+</li>
+
+</ul>
+</div>
+
 </div>
 
 <!-- 資訊 -->
-<div v-if="tab==='info'" class="card">
-<h3>住宿</h3>
-<p>📍旭逸酒店 荃灣</p>
-<p>📍利澳酒店 澳門</p>
+<div v-if="tab==2" class="glass p-3 rounded-xl text-sm">
+<h2 class="font-bold mb-2">住宿資訊</h2>
+
+<p>
+📍<a href="https://maps.google.com/?q=旭逸酒店荃灣" target="_blank">
+旭逸酒店荃灣
+</a><br>
++852-39588333
+</p>
+
+<p class="mt-2">
+📍<a href="https://maps.google.com/?q=利澳酒店澳門" target="_blank">
+利澳酒店
+</a><br>
++853-28718718
+</p>
+
 </div>
 
 <!-- 行李 -->
-<div v-if="tab==='bag'" class="card">
-<div v-for="b in bag">
-<input type="checkbox"> {{b}}
+<div v-if="tab==3" class="glass p-3 rounded-xl text-sm">
+
+<ul>
+<li><input type="checkbox"> 護照</li>
+<li><input type="checkbox"> 現金</li>
+<li><input type="checkbox"> 行動電源</li>
+<li><input type="checkbox"> 充電器</li>
+<li><input type="checkbox"> 衣服</li>
+<li><input type="checkbox"> 雨傘</li>
+</ul>
+
 </div>
+
+<!-- 大師 -->
+<div v-if="tab==4" class="glass p-3 rounded-xl text-sm">
+
+<ul>
+<li>✔ 八達通一定要買</li>
+<li>✔ 澳門用現金</li>
+<li>✔ 纜車要排隊</li>
+<li>✔ 甜品要晚點去</li>
+</ul>
+
 </div>
 
 </div>
 
 <script>
-const {createApp,ref,onMounted}=Vue;
-
-createApp({
-setup(){
-
-const tab=ref('plan');
-
-const plans=ref([
-{name:'大三巴',lat:22.197,lng:113.541,desc:'澳門地標',route:'步行約10分鐘直走上坡'},
-{name:'禮記雪糕',lat:22.195,lng:113.542,desc:'超人氣雪糕',route:'下坡右轉直走'}
-]);
-
-const weather=ref({hk:'--',mo:'--'});
-
-const bag=ref(['護照','現金','充電器','行動電源','八達通']);
-
-function go(p){
-if(/iPhone|iPad/.test(navigator.userAgent)){
-window.location.href=`http://maps.apple.com/?daddr=${p.lat},${p.lng}`;
-}else{
-window.open(`https://www.google.com/maps/search/?api=1&query=${p.lat},${p.lng}`);
+Vue.createApp({
+data(){
+return{
+tab:1
 }
 }
-
-onMounted(()=>{
-fetch('https://api.open-meteo.com/v1/forecast?latitude=22.3&longitude=114.2&current_weather=true')
-.then(r=>r.json())
-.then(d=>{
-weather.value.hk=d.current_weather.temperature;
-});
-
-fetch('https://api.open-meteo.com/v1/forecast?latitude=22.2&longitude=113.5&current_weather=true')
-.then(r=>r.json())
-.then(d=>{
-weather.value.mo=d.current_weather.temperature;
-});
-});
-
-return{tab,plans,weather,bag,go}
-}
-}).mount('#app');
-</script>
-
-<script>
-if('serviceWorker' in navigator){
-navigator.serviceWorker.register('sw.js');
-}
+}).mount('#app')
 </script>
 
 </body>
