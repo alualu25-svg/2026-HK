@@ -1,235 +1,247 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>2026港澳吃喝之小馬哥首航</title>
 
-<script src="https://unpkg.com/vue@3"></script>
+<!-- Vue -->
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<!-- Tailwind -->
 <script src="https://cdn.tailwindcss.com"></script>
 
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+
 <style>
-body {
-  background: linear-gradient(to bottom, #0f172a, #1e3a8a);
+body{
+  background: linear-gradient(180deg,#020617,#0f172a,#020617);
+  color:white;
+  font-family: sans-serif;
 }
-.glass {
+.card{
+  background: rgba(255,255,255,0.08);
   backdrop-filter: blur(10px);
-  background: rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding:12px;
+  margin-bottom:12px;
 }
-.tab {
-  padding:10px;
-  cursor:pointer;
+.tab{
+  padding:8px;
+  border-radius:10px;
 }
-.active {
-  border-bottom:2px solid yellow;
+.active{
+  background:#38bdf8;
+  color:black;
 }
 </style>
 </head>
 
-<body class="text-white">
+<body>
 
 <div id="app" class="max-w-md mx-auto p-3">
 
 <!-- 標題 -->
-<div class="rounded-xl p-4 mb-3 bg-cover" 
-style="background-image:url('https://images.unsplash.com/photo-1505761671935-60b3a7427bad');">
+<div class="text-center text-lg font-bold mb-2">
+2026港澳吃喝之小馬哥首航
+</div>
 
-<h1 class="text-xl font-bold">2026港澳吃喝之小馬哥首航</h1>
-<p class="text-xs mt-1">旅遊人員：小馬哥 / 小村 / 陳RuRu / Ruby / 妹妹</p>
+<div class="text-center text-xs mb-2">
+小馬哥・小村・陳RuRu・Ruby・妹妹
+</div>
+
+<!-- 天氣 -->
+<div class="text-center text-xs text-blue-300 mb-3">
+🌤 {{ weather }}
 </div>
 
 <!-- 分頁 -->
-<div class="flex justify-around glass rounded-xl mb-3">
-<div class="tab" :class="{active:tab==1}" @click="tab=1">行程</div>
-<div class="tab" :class="{active:tab==2}" @click="tab=2">資訊</div>
-<div class="tab" :class="{active:tab==3}" @click="tab=3">行李</div>
-<div class="tab" :class="{active:tab==4}" @click="tab=4">大師</div>
+<div class="flex justify-around mb-3">
+<div @click="tab=1" :class="['tab',tab==1?'active':'']">行程</div>
+<div @click="tab=2" :class="['tab',tab==2?'active':'']">住宿</div>
+<div @click="tab=3" :class="['tab',tab==3?'active':'']">行李</div>
+<div @click="tab=4" :class="['tab',tab==4?'active':'']">攻略</div>
 </div>
 
 <!-- 行程 -->
 <div v-if="tab==1">
 
-<!-- Day1 -->
-<div class="glass p-3 rounded-xl mb-3">
-<h2 class="font-bold">8/28 (五) 香港 🌤</h2>
+<!-- DAY1 -->
+<div class="card">
+<div class="font-bold">DAY1 8/28 ✈ 香港</div>
+<div class="text-xs">HB703 11:30 TPE ✈ 13:30 HKG</div>
 
-<!-- 登機證 -->
-<div class="bg-white text-black p-2 rounded mt-2 text-xs">
-✈ HB703｜TPE 11:30 → HKG 13:30
+<div class="mt-2 text-sm">
+13:30 抵達香港機場<br>
+<button @click="nav('Hong Kong International Airport')" class="text-xs text-blue-300">📍導航</button>
 </div>
 
-<ul class="text-sm mt-2 space-y-2">
-
-<li>
-13:30 抵達機場  
-📍<a href="https://maps.google.com/?q=香港機場" target="_blank">導航</a>
-</li>
-
-<li>
-S1 巴士 → 東薈城  
-💰3.7HKD｜15分鐘  
-📍<a href="https://maps.google.com/?q=Citygate Outlets" target="_blank">導航</a>
-</li>
-
-<li>
-東薈城購物（COACH）  
-🕒10:00-22:00
-</li>
-
-<li>
-E32 → 葵興站 → 酒店  
-💰10.8HKD｜45分鐘  
-📍<a href="https://maps.google.com/?q=旭逸酒店荃灣" target="_blank">導航</a>
-</li>
-
-<li>
-地鐵 → 灣仔 A3  
-💰15HKD｜35分鐘  
-📍<a href="https://maps.google.com/?q=竺扶大班燒味" target="_blank">燒味</a>
-</li>
-
-<li>
-叮叮車 → 租庇利街  
-💰3HKD  
-📍<a href="https://maps.google.com/?q=中環半山手扶梯" target="_blank">手扶梯</a>
-</li>
-
-<li>
-山頂纜車 → 夜景  
-💰108HKD  
-📍<a href="https://maps.google.com/?q=山頂纜車" target="_blank">導航</a>
-</li>
-
-<li>
-天星小輪 → 尖沙咀  
-💰5HKD  
-📍<a href="https://maps.google.com/?q=佳佳甜品" target="_blank">甜品</a>
-</li>
-
-</ul>
+<div class="mt-2 text-sm">
+14:30 搭 S1 巴士 → 東薈城<br>
+💰3.7 HKD ⏱15分鐘<br>
+<button @click="nav('Citygate Outlets')" class="text-xs text-blue-300">📍導航</button>
 </div>
 
-<!-- Day2 -->
-<div class="glass p-3 rounded-xl mb-3">
-<h2 class="font-bold">8/29 (六) 香港→澳門 🌤</h2>
-
-<ul class="text-sm mt-2 space-y-2">
-
-<li>
-太子站 → 一點心  
-📍<a href="https://maps.google.com/?q=一點心" target="_blank">導航</a>
-</li>
-
-<li>
-上環購物  
-📍<a href="https://maps.google.com/?q=珍妮曲奇上環" target="_blank">珍妮</a>
-</li>
-
-<li>
-港澳快線 → 澳門  
-💰180HKD
-</li>
-
-<li>
-利澳酒店  
-📍<a href="https://maps.google.com/?q=利澳酒店澳門" target="_blank">導航</a>
-</li>
-
-<li>
-大三巴 + 最香餅家  
-📍<a href="https://maps.google.com/?q=大三巴牌坊" target="_blank">導航</a>
-</li>
-
-</ul>
+<div class="mt-2 text-sm">
+17:00 搭 E32 → 葵興站<br>
+💰10.8 HKD ⏱45分鐘
 </div>
 
-<!-- Day3 -->
-<div class="glass p-3 rounded-xl">
-<h2 class="font-bold">8/30 (日) 澳門→台灣 🌤</h2>
-
-<div class="bg-white text-black p-2 rounded mt-2 text-xs">
-✈ JX206｜MFM 20:50 → TPE 22:40
+<div class="mt-2 text-sm">
+18:30 地鐵：葵興 → 金鐘 → 灣仔 A3出口<br>
+<button @click="nav('Wan Chai Station A3')" class="text-xs text-blue-300">📍導航</button>
 </div>
 
-<ul class="text-sm mt-2 space-y-2">
+<div class="mt-2 text-sm">
+19:30 叮叮車 → 中環
+</div>
 
-<li>
-世紀咖啡  
-📍<a href="https://maps.google.com/?q=世紀咖啡澳門" target="_blank">導航</a>
-</li>
+<div class="mt-2 text-sm">
+20:30 山頂纜車（來回108）
+</div>
 
-<li>
-威尼斯人 / 倫敦人  
-📍<a href="https://maps.google.com/?q=威尼斯人澳門" target="_blank">導航</a>
-</li>
-
-<li>
-19:30 機場  
-📍<a href="https://maps.google.com/?q=澳門機場" target="_blank">導航</a>
-</li>
-
-</ul>
+<div class="mt-2 text-sm">
+22:00 天星小輪 → 尖沙咀
 </div>
 
 </div>
 
-<!-- 資訊 -->
-<div v-if="tab==2" class="glass p-3 rounded-xl text-sm">
-<h2 class="font-bold mb-2">住宿資訊</h2>
+<!-- DAY2 -->
+<div class="card">
+<div class="font-bold">DAY2 8/29 香港→澳門</div>
 
-<p>
-📍<a href="https://maps.google.com/?q=旭逸酒店荃灣" target="_blank">
-旭逸酒店荃灣
-</a><br>
-+852-39588333
-</p>
+<div class="mt-2 text-sm">
+10:00 太子站 C2 出口<br>
+<button @click="nav('Prince Edward Station C2')" class="text-xs text-blue-300">📍導航</button>
+</div>
 
-<p class="mt-2">
-📍<a href="https://maps.google.com/?q=利澳酒店澳門" target="_blank">
-利澳酒店
-</a><br>
-+853-28718718
-</p>
+<div class="mt-2 text-sm">
+11:30 上環購物：兆成行 → 珍妮曲奇 → 蘭芳園
+</div>
+
+<div class="mt-2 text-sm">
+14:30 港澳快線<br>
+💰180 HKD
+</div>
+
+<div class="mt-2 text-sm">
+17:30 回力站 → 利澳酒店<br>
+<button @click="nav('Rio Hotel Macau')" class="text-xs text-blue-300">📍導航</button>
+</div>
+
+<div class="mt-2 text-sm">
+18:30 大三巴 → 禮記雪糕
+</div>
+
+</div>
+
+<!-- DAY3 -->
+<div class="card">
+<div class="font-bold">DAY3 8/30 澳門→台灣</div>
+<div class="text-xs">JX206 20:50 MFM ✈ 22:40 TPE</div>
+
+<div class="mt-2 text-sm">
+10:30 世紀咖啡<br>
+<button @click="nav('Macau Cafe')" class="text-xs text-blue-300">📍導航</button>
+</div>
+
+<div class="mt-2 text-sm">
+12:00 官也街購物
+</div>
+
+<div class="mt-2 text-sm">
+19:30 澳門機場
+</div>
+
+</div>
+
+</div>
+
+<!-- 住宿 -->
+<div v-if="tab==2">
+
+<div class="card">
+🏨 香港住宿<br>
+旭逸酒店 荃灣<br>
+<button @click="nav('Hotel Ease Tsuen Wan')" class="text-xs text-blue-300">📍導航</button><br>
+☎ +852-39588333
+</div>
+
+<div class="card">
+🏨 澳門住宿<br>
+利澳酒店<br>
+<button @click="nav('Rio Hotel Macau')" class="text-xs text-blue-300">📍導航</button><br>
+☎ +853-28718718
+</div>
 
 </div>
 
 <!-- 行李 -->
-<div v-if="tab==3" class="glass p-3 rounded-xl text-sm">
-
-<ul>
-<li><input type="checkbox"> 護照</li>
-<li><input type="checkbox"> 現金</li>
-<li><input type="checkbox"> 行動電源</li>
-<li><input type="checkbox"> 充電器</li>
-<li><input type="checkbox"> 衣服</li>
-<li><input type="checkbox"> 雨傘</li>
-</ul>
-
+<div v-if="tab==3">
+<div class="card" v-for="item in bag">
+<label>
+<input type="checkbox" v-model="checked[item]">
+{{ item }}
+</label>
+</div>
 </div>
 
-<!-- 大師 -->
-<div v-if="tab==4" class="glass p-3 rounded-xl text-sm">
-
-<ul>
-<li>✔ 八達通一定要買</li>
-<li>✔ 澳門用現金</li>
-<li>✔ 纜車要排隊</li>
-<li>✔ 甜品要晚點去</li>
-</ul>
-
+<!-- 攻略 -->
+<div v-if="tab==4">
+<div class="card">
+✔ 八達通必買<br>
+✔ 山頂纜車建議預訂<br>
+✔ 澳門賭場接駁車免費<br>
+✔ 地鐵最方便
+</div>
 </div>
 
 </div>
 
 <script>
-Vue.createApp({
+const app = Vue.createApp({
 data(){
 return{
-tab:1
+tab:1,
+weather:'載入天氣...',
+bag:['護照','機票','行動電源','充電器','轉接頭','現金'],
+checked:{}
+}
+},
+methods:{
+nav(place){
+window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place)}`)
+}
+},
+mounted(){
+
+// 天氣
+fetch("https://wttr.in/HongKong?format=3")
+.then(r=>r.text())
+.then(t=> this.weather = t)
+
+// 行李記憶
+const saved = localStorage.getItem("bag")
+if(saved) this.checked = JSON.parse(saved)
+
+},
+watch:{
+checked:{
+deep:true,
+handler(v){
+localStorage.setItem("bag",JSON.stringify(v))
 }
 }
-}).mount('#app')
+}
+})
+app.mount('#app')
+
+// Service Worker
+if('serviceWorker' in navigator){
+navigator.serviceWorker.register('sw.js')
+}
 </script>
 
 </body>
